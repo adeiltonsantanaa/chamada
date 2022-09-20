@@ -20,7 +20,7 @@ public class AlunoService {
 		if (aluno.getMatricula() == null || aluno.getNome() == null) {
 			throw new NullInputException(
 					"Não pode haver campos nulos! MATRICULA: " + (aluno.getMatricula() != null ? "ok" : "Campo nulo")
-						+ " NOME: " + (aluno.getNome() != null ? "ok" : "Campo nulo"));
+							+ " NOME: " + (aluno.getNome() != null ? "ok" : "Campo nulo"));
 		}
 
 		return alunoRepository.save(aluno);

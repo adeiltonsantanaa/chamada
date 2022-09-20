@@ -18,7 +18,7 @@ public class ProfessorModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(length = 50, nullable = true, unique = false)
+	@Column(length = 50, nullable = false, unique = false)
 	private String nome;
 	
 	@OneToMany(mappedBy = "professor")
