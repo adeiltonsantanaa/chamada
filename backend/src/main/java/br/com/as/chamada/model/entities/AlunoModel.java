@@ -18,7 +18,7 @@ public class AlunoModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(length = 12, nullable = false, unique = true)
+	@Column(length = 12, nullable = true, unique = true)
 	private Long matricula;
 
 	@Column(length = 50, unique = false)
@@ -26,5 +26,27 @@ public class AlunoModel {
 
 	@ManyToMany(mappedBy = "alunos")
 	List<TurmaDisciplinaModel> turmaDisc;
+
+	public Long getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(Long matricula) {
+		this.matricula = matricula;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Long getId() {
+		return id;
+	}
+	
+	
 
 }
