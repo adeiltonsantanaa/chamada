@@ -23,7 +23,7 @@ public class ProfessorController {
 	@Autowired
 	private ProfessorService professorService;
 
-	@GetMapping(value = "/buscar")
+	@GetMapping(value = "/buscar", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<ProfessorModel> buscarTodos() {
 		return professorService.buscarTodos();
 	}
