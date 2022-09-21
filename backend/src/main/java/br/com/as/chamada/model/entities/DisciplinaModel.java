@@ -8,15 +8,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
-@Table(name = "tb_turmaDisciplina")
-public class TurmaDisciplinaModel {
+@Table(name = "tb_Disciplina")
+public class DisciplinaModel {
+
+	public DisciplinaModel(Long id, String turmaNome, String disciplinaNome, ProfessorModel professor,
+			List<ChamadaModel> chamadaModel) {
+		this.id = id;
+		this.turmaNome = turmaNome;
+		this.disciplinaNome = disciplinaNome;
+		this.professor = professor;
+		this.chamadaModel = chamadaModel;
+	}
+
+	public DisciplinaModel() {
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,46 +43,29 @@ public class TurmaDisciplinaModel {
 	@ManyToOne
 	@JoinColumn(name = "professor")
 	private ProfessorModel professor;
-	
-	@OneToMany(mappedBy = "turmaDiscModel")
+
+	@OneToMany(mappedBy = "discModel")
 	List<ChamadaModel> chamadaModel;
 
-	@ManyToMany
-	@JoinTable(name = "tb_disciplina_aluno", 
-	joinColumns = @JoinColumn(name = "fk_turmaDisc"), 
-	inverseJoinColumns = @JoinColumn(name = "fk_aluno"))
-	List<AlunoModel> alunos;
+	public Long getId() {
+		return id;
+	}
 
 	public String getTurmaNome() {
 		return turmaNome;
-	}
-
-	public void setTurmaNome(String turmaNome) {
-		this.turmaNome = turmaNome;
 	}
 
 	public String getDisciplinaNome() {
 		return disciplinaNome;
 	}
 
-	public void setDisciplinaNome(String disciplinaNome) {
-		this.disciplinaNome = disciplinaNome;
-	}
-
+	@JsonBackReference
 	public ProfessorModel getProfessor() {
 		return professor;
 	}
 
-	public void setProfessor(ProfessorModel professor) {
-		this.professor = professor;
+	public List<ChamadaModel> getChamadaModel() {
+		return chamadaModel;
 	}
-
-	public Long getId() {
-		return id;
-	}
-	
-	
-	
-	
 
 }

@@ -1,5 +1,6 @@
 package br.com.as.chamada.model.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,37 +14,46 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_registro_chamada")
-public class ChamadaModel {
+public class ChamadaModel implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	public ChamadaModel(Long id, Long matricula, DisciplinaModel discModel, Date datetime) {
+		this.id = id;
+		this.matricula = matricula;
+		this.discModel = discModel;
+		this.datetime = datetime;
+	}
+
+	public ChamadaModel() {
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@ManyToOne
-	@JoinColumn(name = "fk_aluno")
-	private AlunoModel alunoModel;
-	
+
+	private Long matricula;
+
 	@ManyToOne
 	@JoinColumn(name = "fk_turmaDisc")
-	private TurmaDisciplinaModel turmaDiscModel;
-	
+	private DisciplinaModel discModel;
+
 	@Column(name = "data_registro")
 	private Date datetime;
 
-	public AlunoModel getAlunoModel() {
-		return alunoModel;
+	public Long getId() {
+		return id;
 	}
 
-	public void setAlunoModel(AlunoModel alunoModel) {
-		this.alunoModel = alunoModel;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public TurmaDisciplinaModel getTurmaDiscModel() {
-		return turmaDiscModel;
+	public DisciplinaModel getDiscModel() {
+		return discModel;
 	}
 
-	public void setTurmaDiscModel(TurmaDisciplinaModel turmaDiscModel) {
-		this.turmaDiscModel = turmaDiscModel;
+	public void setDiscModel(DisciplinaModel discModel) {
+		this.discModel = discModel;
 	}
 
 	public Date getDatetime() {
@@ -54,10 +64,12 @@ public class ChamadaModel {
 		this.datetime = datetime;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getMatricula() {
+		return matricula;
 	}
-	
-	
-	
+
+	public void setMatricula(Long matricula) {
+		this.matricula = matricula;
+	}
+
 }
