@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +31,9 @@ public class TurmaDisciplinaModel {
 	@ManyToOne
 	@JoinColumn(name = "professor")
 	private ProfessorModel professor;
+	
+	@OneToMany(mappedBy = "turmaDiscModel")
+	List<ChamadaModel> chamadaModel;
 
 	@ManyToMany
 	@JoinTable(name = "tb_disciplina_aluno", 
