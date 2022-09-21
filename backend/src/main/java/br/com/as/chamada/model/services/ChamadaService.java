@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.as.chamada.exceptions.NullInputException;
 import br.com.as.chamada.model.dto.ChamadaDTO;
 import br.com.as.chamada.model.entities.ChamadaModel;
 import br.com.as.chamada.model.entities.DisciplinaModel;
@@ -25,6 +26,10 @@ public class ChamadaService {
 	}
 
 	public ChamadaDTO adicionaUmRegistro(ChamadaDTO dto, ChamadaModel chamada) {
+		
+		if(chamada.getMatricula() == null) {
+			throw new NullInputException("A matrícula não pode ser nula!");
+		}
 
 		DisciplinaModel disciplina = disciplinaRepository.getById((long) 1);
 		chamada.setDiscModel(disciplina);
