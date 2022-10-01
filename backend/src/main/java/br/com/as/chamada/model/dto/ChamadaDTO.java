@@ -2,8 +2,6 @@ package br.com.as.chamada.model.dto;
 
 import java.util.Date;
 
-import br.com.as.chamada.model.entities.ProfessorModel;
-
 public class ChamadaDTO {
 
 	private Long id;
