@@ -2,15 +2,20 @@ package br.com.as.chamada.model.dto;
 
 import java.util.Date;
 
+import br.com.as.chamada.model.entities.ChamadaModel;
+import br.com.as.chamada.model.entities.DisciplinaModel;
+
 public class ChamadaDTO {
 
 	private Long id;
+	private Long matricula;
 	private Long disciplina;
 	private Date date;
-	private Long professor;
+	private String professor;
 
-	public ChamadaDTO(Long id, Long disciplina, Date date, Long professor) {
+	public ChamadaDTO(Long id, Long matricula, Long disciplina, Date date, String professor) {
 		this.id = id;
+		this.matricula = matricula;
 		this.disciplina = disciplina;
 		this.date = date;
 		this.professor = professor;
@@ -19,8 +24,11 @@ public class ChamadaDTO {
 	public ChamadaDTO() {
 	}
 
-	public ChamadaDTO transformaParaDTO(Long id, Long disciplina, Date date, Long professor) {
-		return new ChamadaDTO(id, disciplina, date, professor);
+	public static ChamadaDTO transformaParaDTO(Long id, Long matricula, Long disciplina, Date date, String professor) {
+		return new ChamadaDTO(id, matricula, disciplina, date, professor);
+	}
+	public static ChamadaModel transformaParaOBJ(Long matricula, DisciplinaModel disciplina, Date datetime) {
+		return new ChamadaModel(matricula, disciplina, datetime);
 	}
 
 	public Long getId() {
@@ -47,11 +55,19 @@ public class ChamadaDTO {
 		this.date = date;
 	}
 
-	public Long getProfessor() {
+	public Long getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(Long matricula) {
+		this.matricula = matricula;
+	}
+
+	public String getProfessor() {
 		return professor;
 	}
 
-	public void setProfessor(Long professor) {
+	public void setProfessor(String professor) {
 		this.professor = professor;
 	}
 
