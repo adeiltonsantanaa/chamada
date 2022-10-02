@@ -29,18 +29,19 @@ public class ChamadaService {
 		return chamadaRepository.findAll();
 	}
 
-	public ChamadaDTO adicionaUmRegistro(ChamadaDTO dto, ChamadaModel chamada) {
-
-		if (chamada.getMatricula() == null) {
-			throw new NullInputException("A matrícula não pode ser nula!");
+	public ChamadaDTO adicionaUmRegistro(ChamadaDTO dto) {
+		if (dto.getMatricula() == null || dto.getDisciplina() == null) {
+			if (dto.getMatricula() == null) {
+				throw new NullInputException("Matrícula não pode ser nula!");
+			}
+			throw new NullInputException("Disciplina não pode ser nula");
 		}
-		if (verificaMatricula(chamada.getMatricula())) {
-			DisciplinaModel disciplina = disciplinaRepository.getReferenceById((long) 1);
-			chamada.setDiscModel(disciplina);
-			chamada.setDatetime(new Date());
-			chamadaRepository.save(chamada);
-			var result = dto.transformaParaDTO(chamada.getId(), disciplina.getId(), chamada.getDatetime(),
-					disciplina.getProfessor().getId());
+		if (verificaMatricula(dto.getMatricula())) {
+			DisciplinaModel disciplina = disciplinaRepository.getReferenceById(dto.getDisciplina());
+			ChamadaModel obj = ChamadaDTO.transformaParaOBJ(dto.getMatricula(), disciplina, new Date());
+			chamadaRepository.save(obj);
+			ChamadaDTO result = ChamadaDTO.transformaParaDTO(obj.getId(), obj.getMatricula(), disciplina.getId(),
+					obj.getDatetime(), disciplina.getProfessor().getNome());
 			return result;
 		}
 		throw new ResourceNotFoundException("Matrícula não encontrada");
