@@ -31,9 +31,15 @@ public class ChamadaController {
 		return chamadaService.buscarTurmas();
 	}
 
+	@PostMapping(value = "/testar")
+	public void testar(@RequestBody ChamadaModel chamada) {
+		System.out.println(chamada.getMatricula());
+		System.out.println(chamada.getDiscModel());
+	}
+
 	@PostMapping(value = "/salvar", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ChamadaDTO salvar(@RequestBody ChamadaModel chamada, ChamadaDTO dto) {
-		return chamadaService.adicionaUmRegistro(dto, chamada);
+	public ChamadaDTO salvar(@RequestBody ChamadaDTO dto) {
+		return chamadaService.adicionaUmRegistro(dto);
 	}
 
 }
