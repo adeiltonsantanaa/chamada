@@ -17,14 +17,15 @@ import javax.persistence.Table;
 public class ChamadaModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	public ChamadaModel(Long id, Long matricula, DisciplinaModel discModel, Date datetime) {
-		this.id = id;
+	public ChamadaModel(Long matricula, DisciplinaModel discModel, Date datetime) {
 		this.matricula = matricula;
 		this.discModel = discModel;
 		this.datetime = datetime;
 	}
 
 	public ChamadaModel() {
+	}
+	public ChamadaModel(Long matricula) {
 	}
 
 	@Id
