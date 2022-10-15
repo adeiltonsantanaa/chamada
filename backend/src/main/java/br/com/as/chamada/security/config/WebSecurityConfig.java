@@ -38,9 +38,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/usuario/**").permitAll()
-		.antMatchers("/h2/**").permitAll().anyRequest()
-				.authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/usuario/**").permitAll().antMatchers("/h2/**")
+				.permitAll().antMatchers("/api/v1/chamada/salvar").permitAll()
+				.antMatchers("/api/v1/chamada/buscar/turmas").permitAll().anyRequest().authenticated().and()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 		httpSecurity.headers().frameOptions().disable();
 	}

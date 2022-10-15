@@ -25,8 +25,12 @@ public class ChamadaService {
 	@Autowired
 	private AlunoRepository alunoRepository;
 
-	public List<ChamadaModel> buscarTurmas() {
+	public List<ChamadaModel> buscarChamadas() {
 		return chamadaRepository.findAll();
+	}
+
+	public List<DisciplinaModel> buscarTurmas() {
+		return disciplinaRepository.findAll();
 	}
 
 	public ChamadaDTO adicionaUmRegistro(ChamadaDTO dto) {
