@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.as.chamada.model.dto.ChamadaDTO;
 import br.com.as.chamada.model.entities.ChamadaModel;
+import br.com.as.chamada.model.entities.DisciplinaModel;
 import br.com.as.chamada.model.services.ChamadaService;
 
 @RestController
@@ -28,15 +29,15 @@ public class ChamadaController {
 		return "check ok";
 	}
 
-	@GetMapping(value = "/buscar")
-	public List<ChamadaModel> buscarTurmas() {
-		return chamadaService.buscarTurmas();
+	@PreAuthorize("hasAnyRole('ADMINISTRADOR', 'OPERADOR', 'CONSULTA')")
+	@GetMapping(value = "/buscar/chamadas")
+	public List<ChamadaModel> BuscarChamadas() {
+		return chamadaService.buscarChamadas();
 	}
 
-	@PostMapping(value = "/testar")
-	public void testar(@RequestBody ChamadaModel chamada) {
-		System.out.println(chamada.getMatricula());
-		System.out.println(chamada.getDiscModel());
+	@GetMapping(value = "/buscar/turmas")
+	public List<DisciplinaModel> BuscarTurmas() {
+		return chamadaService.buscarTurmas();
 	}
 
 	@PostMapping(value = "/salvar", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
