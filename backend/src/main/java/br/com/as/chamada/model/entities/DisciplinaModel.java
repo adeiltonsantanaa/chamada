@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_Disciplina")
@@ -46,6 +47,7 @@ public class DisciplinaModel {
 	@JoinColumn(name = "professor")
 	private ProfessorModel professor;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "discModel")
 	List<ChamadaModel> chamadaModel;
 	
