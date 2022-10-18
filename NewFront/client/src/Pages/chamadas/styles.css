@@ -1,35 +1,34 @@
-.book-container {
+.chamada-container {
     width: 100%;
     max-width: 1180px;
-    padding: 0 30px;
     margin: 32px auto;
 }
 
-.book-container header{
+.chamada-container header{
     display: flex;
     align-items: center;
 }
 
-.book-container header span{
+.chamada-container header span{
     font-size: 20px;
     margin-left: 24px;
 }
 
-.book-container header span strong{
+.chamada-container header span strong{
     color: #251FC5;
 }
 
-.book-container header img{
+.chamada-container header img{
     height: 64px;
 }
 
-.book-container header a{
+.chamada-container header a{
     width: 260px;
     margin-left: auto;
     margin-top: 0;
 }
 
-.book-container header button{
+.chamada-container header button{
     height: 60px;
     width: 60px;
     border-radius: 4px;
@@ -39,30 +38,30 @@
     transition: border-color 0.5s;
 }
 
-.book-container header button:hover{
+.chamada-container header button:hover{
     border-color: #251FC5;
 }
 
-.book-container h1 {
-    margin-top: 80px;
+.chamada-container h1 {
+    margin-top: 40px;
     margin-bottom: 24px;
 }
 
-.book-container ul {
+.chamada-container ul {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 24px;
+    grid-template-columns: repeat(4, 2fr);
+    grid-gap: 15px;
     list-style: none;
 }
 
-.book-container ul li{
+.chamada-container ul li{
     background: #ffffff;
     padding: 24px;
     border-radius: 8px;
     position: relative;
 }
 
-.book-container ul li button {
+.chamada-container ul li button {
     position: absolute;
     right: 24px;
     top: 24px;
@@ -70,26 +69,26 @@
     background: transparent;  
 }
 
-.book-container ul li button + button{
+.chamada-container ul li button + button{
     top: 50px;  
 }
 
-.book-container ul li button:hover{
+.chamada-container ul li button:hover{
     opacity: 0.8;  
 }
 
-.book-container ul li strong{
+.chamada-container ul li strong{
     display: block;
-    margin-bottom: 16px;
+    margin-bottom: 5px;
     color: #41414D;
 }
 
-.book-container ul li p + strong{
-    margin-top: 32px;
+.chamada-container ul li p + strong{
+    margin-top: 12px;
 
 }
 
-.book-container ul li p {
+.chamada-container ul li p {
     color: #737380;
     line-height: 21px;
     font-size: 16px;

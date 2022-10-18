@@ -30,7 +30,7 @@ public class ChamadaController {
 	public String check() {
 		return "check ok";
 	}
-
+	
 	@PreAuthorize("hasAnyRole('ADMINISTRADOR', 'OPERADOR', 'CONSULTA')")
 	@GetMapping(value = "/buscar/chamadas")
 	public List<ChamadaModel> BuscarChamadas() {

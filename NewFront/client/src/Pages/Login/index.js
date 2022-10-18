@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles.css';
 import api from '../../services/api';
-import logo from '../../assets/padlock.png'
+import cadeado from '../../assets/cadeado.svg'
+import { saudacao } from '../../uteis/getSaudacao';
+
 
 export default function Login() {
 
@@ -12,17 +14,15 @@ export default function Login() {
 
     async function login(e) {
         e.preventDefault();
-
         const data = {
             email,
             password,
         };
-
         try {
             const response = await api.post('usuario/autenticacao', data);
             localStorage.setItem('email', email);
             localStorage.setItem('accessToken', response.data.token);
-            history('/book')
+            history('/chamadas')
         } catch (err) {
             alert('Login falhou!');
         }
@@ -33,7 +33,7 @@ export default function Login() {
         <div className='login-container'>
             <section className='form'>
                 <form onSubmit={login}>
-                    <h1>Access your account</h1>
+                    <h1>{saudacao()} professor.</h1>
                     <input
                         placeholder='Username'
                         value={email}
@@ -49,8 +49,7 @@ export default function Login() {
                 </form>
 
             </section>
-            <img src={logo} alt="login" />
-
+            <img src={cadeado} alt="login" />
         </div>
     )
 }

@@ -1,19 +1,22 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Login from "./Pages/Login";
-import Book from "./Pages/Book";
-import NewBook from "./Pages/NewBook";
+import Chamadas from "./Pages/chamadas";
+import NovaChamada from "./Pages/novaChamada";
+import { isAuthenticated } from './auth'
 
-export default function Rotas() {
-    return(
+const Private = ({Component}) => {
+    return isAuthenticated() ? <Component/> : <Navigate to="/login"/>
+};
+
+export default function rotas() {
+    return (
         <BrowserRouter>
             <Routes>
-                <Route exact path="/" element={<Login/>}/>
-                <Route exact path="/book" element={<Book/>}/>
-                <Route exact path="/book/new" element={<NewBook/>}/>
+                <Route exact path="/login" element={<Login />} />
+                <Route exact path="/chamadas" element={<Private Component={Chamadas}/>} />
+                <Route exact path="/chamadas/manual" element={<Private Component={NovaChamada}/>} />
             </Routes>
         </BrowserRouter>
-
     );
 }

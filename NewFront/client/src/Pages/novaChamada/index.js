@@ -4,28 +4,26 @@ import { FiArrowLeft } from "react-icons/fi";
 
 import './styles.css';
 
-export default function NewBook(){
+export default function NovaChamada(){
     return (
-        <div className="new-book-container">
+        <div className="new-chamada-container">
             <div className="content">
                 <section className="form">
-                    <h1>Add new Book</h1>
-                    <p>Enter the book information</p>
-                    <Link className="back-link" to='/book'>
+                    <h1>Adicionar Nova Chamada</h1>
+                    <Link className="back-link" to='/chamadas'>
                         <FiArrowLeft size={16} color='#251fc5'/>
-                        Home
+                        Chamadas
                     </Link>
                 </section>
+                <div>
+                <p className="paragrafo">Entre com a informação da chamada</p>
                 <form>
-                    <input placeholder="Title"/>
-                    <input placeholder="Author"/>
-                    <input type="date" />
-                    <input placeholder="Price"/>
-
+                    <input placeholder="Matricula"/>
+                    <input placeholder="Disciplina"/>
                     <button className="button" type="submit">Add</button>
                 </form>
+                </div>
             </div>
         </div>
     );
-
 }

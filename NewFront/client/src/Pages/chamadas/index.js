@@ -1,0 +1,50 @@
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { FiPower, FiEdit, FiTrash2 } from 'react-icons/fi'
+import './styles.css';
+
+export default function Chamadas() {
+
+    const [chamada, setChamada] = useState([]);
+    const history = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+        axios.get('http://localhost:8080/api/v1/chamada/buscar/chamadas', { headers: { Authorization: 'Bearer ' + token } })
+        .then(res => setChamada(res.data))
+        .catch(err => console.log(err));
+    }, [])
+
+    function logout() {
+        localStorage.clear();
+        history('/login')
+    }
+
+    return (
+        <div className="chamada-container">
+            <header>
+                <span>Bem vindo, <strong>{localStorage.getItem('email')}</strong></span>
+                <Link className="button" to='/chamadas/manual'>Chamada Manual</Link>
+                <button type="button" onClick={logout}>
+                    <FiPower size={18} color='#25ifc5' />
+                </button>
+            </header>
+            <h1>Lista de Chamadas</h1>
+            <ul>
+            {chamada.map(chamada => (
+                    <li key={chamada.id}>
+                        <strong>Id:</strong>
+                        <p>{chamada.id}</p>
+                        <strong>Matricula:</strong>
+                        <p>{chamada.matricula}</p>
+                        <strong>Nome Turma:</strong>
+                        <p>{chamada.discModel.turmaNome}</p>
+                        <strong>Nome Disciplina:</strong>
+                        <p>{chamada.discModel.disciplinaNome}</p>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
