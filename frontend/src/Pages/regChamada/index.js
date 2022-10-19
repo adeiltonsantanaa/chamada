@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import { FiArrowLeft } from "react-icons/fi";
-import axios from "axios";
+import api from "../../services/api";
 import './styles.css'
 
 export default function RegistroChamadaAluno() {
@@ -11,13 +11,13 @@ export default function RegistroChamadaAluno() {
     const [matricula, setMatricula] = useState(0);
 
     useState(() => {
-        axios.get('http://localhost:8080/api/v1/chamada/buscar/turmas')
+        api.get('/api/v1/chamada/buscar/turmas')
             .then(res => setTurma(res.data))
             .catch(err => console.log(err));
     }, [])
 
     function salvaChamada() {
-            axios.post('http://localhost:8080/api/v1/chamada/salvar', {
+            api.post('/api/v1/chamada/salvar', {
                 disciplina: disciplina,
                 matricula: matricula,
             }).then(res => alert("Presença Registrada!"))

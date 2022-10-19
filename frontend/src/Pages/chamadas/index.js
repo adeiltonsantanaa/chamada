@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import axios from "axios";
-import { FiPower, FiEdit, FiTrash2 } from 'react-icons/fi'
+import { FiPower } from 'react-icons/fi'
 import './styles.css';
+import api from "../../services/api";
 
 export default function Chamadas() {
 
@@ -11,7 +11,7 @@ export default function Chamadas() {
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
-        axios.get('http://localhost:8080/api/v1/chamada/buscar/chamadas', { headers: { Authorization: 'Bearer ' + token } })
+        api.get('/api/v1/chamada/buscar/chamadas', { headers: { Authorization: 'Bearer ' + token } })
         .then(res => setChamada(res.data))
         .catch(err => console.log(err));
     }, [])
