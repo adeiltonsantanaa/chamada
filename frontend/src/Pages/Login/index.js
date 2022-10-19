@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles.css';
+import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import cadeado from '../../assets/cadeado.svg'
 import { saudacao } from '../../uteis/getSaudacao';
+import { FiArrowLeft } from "react-icons/fi";
 
 
 export default function Login() {
@@ -32,6 +34,7 @@ export default function Login() {
     return (
         <div className='login-container'>
             <section className='form'>
+                <div>
                 <form onSubmit={login}>
                     <h1>{saudacao()} professor.</h1>
                     <input
@@ -47,6 +50,11 @@ export default function Login() {
                     />
                     <button className='button' type="submit">Login</button>
                 </form>
+                <Link className="back-link-aluno" to='/'>
+                        <FiArrowLeft size={16} color='#251fc5' />
+                        Sou Aluno
+                    </Link>
+                </div>
 
             </section>
             <img src={cadeado} alt="login" />

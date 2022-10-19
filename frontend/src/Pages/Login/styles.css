@@ -11,6 +11,9 @@
 img  {
     width: 600px;
 }
+.back-link-aluno {
+    padding-top: 10px;
+}
 
 .login-container section.form{
     width: 100%;
