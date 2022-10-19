@@ -17,3 +17,4 @@ INSERT INTO tb_disciplina_aluno (desc_id, aluno_id) values (1,1);
 INSERT INTO TB_REGISTRO_CHAMADA (id, data_registro, matricula, fk_turma_disc) VALUES (999, '2022-01-01', '202108672157', 1);
 INSERT INTO TB_REGISTRO_CHAMADA (id, data_registro, matricula, fk_turma_disc) VALUES (998, '2022-01-02', '202108672158', 2);
 INSERT INTO TB_REGISTRO_CHAMADA (id, data_registro, matricula, fk_turma_disc) VALUES (997, '2022-01-03', '202108672159', 3);
+insert into tb_registro_aula (id, data_registro, descricao, fk_turma_disc, professor) values (999, '2022-01-01', 'teste', 1, 1)
