@@ -14,6 +14,6 @@ INSERT INTO tb_disciplina(disciplina_nome, turma_nome, professor) VALUES ('POO 3
 INSERT INTO tb_disciplina_aluno (desc_id, aluno_id) values (1,1);
 
 
-INSERT INTO TB_REGISTRO_CHAMADA (id, data_registro, matricula, fk_turma_disc) VALUES (1, '2022-01-01', '202108672157', 1);
-INSERT INTO TB_REGISTRO_CHAMADA (id, data_registro, matricula, fk_turma_disc) VALUES (2, '2022-01-02', '202108672158', 2);
-INSERT INTO TB_REGISTRO_CHAMADA (id, data_registro, matricula, fk_turma_disc) VALUES (3, '2022-01-03', '202108672159', 3);
+INSERT INTO TB_REGISTRO_CHAMADA (id, data_registro, matricula, fk_turma_disc) VALUES (999, '2022-01-01', '202108672157', 1);
+INSERT INTO TB_REGISTRO_CHAMADA (id, data_registro, matricula, fk_turma_disc) VALUES (998, '2022-01-02', '202108672158', 2);
+INSERT INTO TB_REGISTRO_CHAMADA (id, data_registro, matricula, fk_turma_disc) VALUES (997, '2022-01-03', '202108672159', 3);

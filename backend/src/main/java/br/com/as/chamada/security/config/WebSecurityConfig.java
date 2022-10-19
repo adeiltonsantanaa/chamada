@@ -38,8 +38,12 @@ public class WebSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.cors().and().csrf().disable().authorizeRequests().antMatchers("/usuario/**").permitAll().antMatchers("/h2/**")
-				.permitAll().anyRequest().authenticated().and().sessionManagement()
+		httpSecurity.cors().and().csrf().disable().authorizeRequests()
+		.antMatchers("/usuario/**").permitAll()
+		.antMatchers("/h2/**").permitAll()
+		.antMatchers("/api/v1/chamada/buscar/turmas").permitAll()
+		.antMatchers("/api/v1/chamada/salvar").permitAll()
+		.anyRequest().authenticated().and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 		httpSecurity.headers().frameOptions().disable();
