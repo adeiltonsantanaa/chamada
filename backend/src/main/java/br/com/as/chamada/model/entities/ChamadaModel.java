@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "tb_registro_chamada")
 public class ChamadaModel implements Serializable {
@@ -39,6 +41,7 @@ public class ChamadaModel implements Serializable {
 	private DisciplinaModel discModel;
 
 	@Column(name = "data_registro")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date datetime;
 
 	public Long getId() {
