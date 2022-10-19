@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.as.chamada.model.dto.ChamadaDTO;
 import br.com.as.chamada.model.entities.ChamadaModel;
-import br.com.as.chamada.model.entities.DisciplinaModel;
 import br.com.as.chamada.model.services.ChamadaService;
+import br.com.as.chamada.model.vo.ChamadaVO;
+import br.com.as.chamada.model.vo.DisciplinaVO;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -38,13 +38,13 @@ public class ChamadaController {
 	}
 
 	@GetMapping(value = "/buscar/turmas")
-	public List<DisciplinaModel> BuscarTurmas() {
+	public List<DisciplinaVO> BuscarTurmas() {
 		return chamadaService.buscarTurmas();
 	}
 
 	@PostMapping(value = "/salvar", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ChamadaDTO salvar(@RequestBody ChamadaDTO dto) {
-		return chamadaService.adicionaUmRegistro(dto);
+	public ChamadaVO salvar(@RequestBody ChamadaVO vo) {
+		return chamadaService.adicionaUmRegistro(vo);
 	}
 
 }
