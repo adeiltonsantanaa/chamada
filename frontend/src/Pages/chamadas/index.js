@@ -42,6 +42,8 @@ export default function Chamadas() {
                         <p>{chamada.discModel.turmaNome}</p>
                         <strong>Nome Disciplina:</strong>
                         <p>{chamada.discModel.disciplinaNome}</p>
+                        <strong>Nome Professor:</strong>
+                        <p>Lucas Martins</p>
                     </li>
                 ))}
             </ul>
