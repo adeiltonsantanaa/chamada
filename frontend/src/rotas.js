@@ -17,10 +17,10 @@ export default function rotas() {
         <BrowserRouter>
             <Routes>
                 <Route path="*" element={<Error404 />} />
-                <Route exact path="/" element={<Login />} />
+                <Route exact path="/login" element={<Login />} />
                 <Route exact path="/chamadas" element={<Private Component={Chamadas}/>} />
                 <Route exact path="/chamadas/manual" element={<Private Component={NovaChamada}/>} />
-                <Route exact path="/chamadas/registro/aluno" element={<RegistroChamadaAluno/>}/>
+                <Route exact path="/" element={<RegistroChamadaAluno/>}/>
             </Routes>
         </BrowserRouter>
     );

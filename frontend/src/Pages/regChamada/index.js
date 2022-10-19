@@ -30,7 +30,7 @@ export default function RegistroChamadaAluno() {
             <div className="content">
                 <section className="form">
                     <h1>Adicionar Nova Chamada</h1>
-                    <Link className="back-link" to='/'>
+                    <Link className="back-link" to='/login'>
                         <FiArrowLeft size={16} color='#251fc5' />
                         Sou Professor
                     </Link>
