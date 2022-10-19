@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 
 import br.com.as.chamada.exceptions.NullInputException;
 import br.com.as.chamada.exceptions.ResourceNotFoundException;
-import br.com.as.chamada.model.dto.ChamadaDTO;
+import br.com.as.chamada.mapper.DozerMapper;
 import br.com.as.chamada.model.entities.ChamadaModel;
 import br.com.as.chamada.model.entities.DisciplinaModel;
 import br.com.as.chamada.model.repositories.AlunoRepository;
 import br.com.as.chamada.model.repositories.ChamadaRepository;
 import br.com.as.chamada.model.repositories.DisciplinaRepository;
+import br.com.as.chamada.model.vo.ChamadaVO;
+import br.com.as.chamada.model.vo.DisciplinaVO;
 
 @Service
 public class ChamadaService {
@@ -29,23 +31,26 @@ public class ChamadaService {
 		return chamadaRepository.findAll();
 	}
 
-	public List<DisciplinaModel> buscarTurmas() {
-		return disciplinaRepository.findAll();
+	public List<DisciplinaVO> buscarTurmas() {
+		List<DisciplinaVO> vo = DozerMapper.parseListObjects(disciplinaRepository.findAll(), DisciplinaVO.class);
+		return vo;
 	}
 
-	public ChamadaDTO adicionaUmRegistro(ChamadaDTO dto) {
-		if (dto.getMatricula() == null || dto.getDisciplina() == null) {
-			if (dto.getMatricula() == null) {
+	public ChamadaVO adicionaUmRegistro(ChamadaVO vo) {
+		if (vo.getMatricula() == null || vo.getDisciplina() == null) {
+			if (vo.getMatricula() == null) {
 				throw new NullInputException("Matrícula não pode ser nula!");
 			}
 			throw new NullInputException("Disciplina não pode ser nula");
 		}
-		if (verificaMatricula(dto.getMatricula())) {
-			DisciplinaModel disciplina = disciplinaRepository.getReferenceById(dto.getDisciplina());
-			ChamadaModel obj = ChamadaDTO.transformaParaOBJ(dto.getMatricula(), disciplina, new Date());
+		if (verificaMatricula(vo.getMatricula())) {
+			DisciplinaModel disciplina = disciplinaRepository.getReferenceById(vo.getDisciplina());
+			ChamadaModel obj = DozerMapper.parseObject(vo, ChamadaModel.class);
+			obj.setDatetime(new Date());
+			obj.setDiscModel(disciplina);
 			chamadaRepository.save(obj);
-			ChamadaDTO result = ChamadaDTO.transformaParaDTO(obj.getId(), obj.getMatricula(), disciplina.getId(),
-					obj.getDatetime(), disciplina.getProfessor().getNome());
+			ChamadaVO result = DozerMapper.parseObject(obj, ChamadaVO.class);
+			result.setDisciplinaNome(disciplina.getDisciplinaNome());
 			return result;
 		}
 		throw new ResourceNotFoundException("Matrícula não encontrada");
