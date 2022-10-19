@@ -32,6 +32,9 @@ public class ProfessorModel {
 
 	@OneToMany(mappedBy = "professor")
 	List<DisciplinaModel> turmaDisciplina;
+	
+	@OneToMany(mappedBy = "professor")
+	List<RegistroAulaModel> regAulas;
 
 	public String getNome() {
 		return nome;
