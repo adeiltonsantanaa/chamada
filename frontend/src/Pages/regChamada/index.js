@@ -19,7 +19,7 @@ export default function RegistroChamadaAluno() {
     function salvaChamada() {
             axios.post('http://localhost:8080/api/v1/chamada/salvar', {
                 disciplina: disciplina,
-                matricula, matricula,
+                matricula: matricula,
             }).then(res => alert("Presença Registrada!"))
             .catch(err => alert(err.response.data.message))
     }
