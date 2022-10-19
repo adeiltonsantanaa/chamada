@@ -43,6 +43,7 @@ public class WebSecurityConfig {
 		.antMatchers("/h2/**").permitAll()
 		.antMatchers("/api/v1/chamada/buscar/turmas").permitAll()
 		.antMatchers("/api/v1/chamada/salvar").permitAll()
+		.antMatchers("/api/v1/aula/programar/aula").permitAll()
 		.anyRequest().authenticated().and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
