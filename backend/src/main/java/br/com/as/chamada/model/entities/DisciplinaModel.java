@@ -21,15 +21,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "tb_Disciplina")
 public class DisciplinaModel {
 
-	public DisciplinaModel(Long id, String turmaNome, String disciplinaNome, ProfessorModel professor,
-			List<ChamadaModel> chamadaModel) {
-		this.id = id;
-		this.turmaNome = turmaNome;
-		this.disciplinaNome = disciplinaNome;
-		this.professor = professor;
-		this.chamadaModel = chamadaModel;
-	}
-
 	public DisciplinaModel() {
 	}
 
@@ -50,16 +41,13 @@ public class DisciplinaModel {
 	@JsonIgnore
 	@OneToMany(mappedBy = "discModel")
 	List<ChamadaModel> chamadaModel;
-	
+
+	@OneToMany(mappedBy = "discModel")
+	List<RegistroAulaModel> regAula;
+
 	@ManyToMany
-	@JoinTable(
-			name = "tb_disciplina_aluno",
-			joinColumns = @JoinColumn(name = "desc_id"),
-			inverseJoinColumns = @JoinColumn(name = "aluno_id")
-			
-			)
+	@JoinTable(name = "tb_disciplina_aluno", joinColumns = @JoinColumn(name = "desc_id"), inverseJoinColumns = @JoinColumn(name = "aluno_id"))
 	private List<AlunoModel> aluno;
-	
 
 	public Long getId() {
 		return id;
