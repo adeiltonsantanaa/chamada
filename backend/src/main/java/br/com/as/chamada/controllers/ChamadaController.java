@@ -26,7 +26,7 @@ public class ChamadaController {
 	private ChamadaService chamadaService;
 
 	@GetMapping(value = "/check")
-	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
+	@PreAuthorize("hasAnyRole('ADMINISTRADOR', 'OPERADOR', 'CONSULTA')")
 	public String check() {
 		return "check ok";
 	}
