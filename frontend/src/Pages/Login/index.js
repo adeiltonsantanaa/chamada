@@ -26,7 +26,7 @@ export default function Login() {
             localStorage.setItem('accessToken', response.data.token);
             history('/chamadas')
         } catch (err) {
-            alert('Login falhou!');
+            alert("Login ou Senha incorreto, tente novamente!");
         }
 
     };
@@ -35,22 +35,22 @@ export default function Login() {
         <div className='login-container'>
             <section className='form'>
                 <div>
-                <form onSubmit={login}>
-                    <h1>{saudacao()} professor.</h1>
-                    <input
-                        placeholder='Username'
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    />
-                    <input
-                        type="password"
-                        placeholder='Password'
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                    <button className='button' type="submit">Login</button>
-                </form>
-                <Link className="back-link-aluno" to='/'>
+                    <form onSubmit={login}>
+                        <h1>{saudacao()} professor.</h1>
+                        <input
+                            placeholder='Username'
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                        />
+                        <input
+                            type="password"
+                            placeholder='Password'
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                        />
+                        <button className='button' type="submit">Login</button>
+                    </form>
+                    <Link className="back-link-aluno" to='/'>
                         <FiArrowLeft size={16} color='#251fc5' />
                         Sou Aluno
                     </Link>
