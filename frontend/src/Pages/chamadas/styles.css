@@ -8,6 +8,9 @@
     display: flex;
     align-items: center;
 }
+.button-reg {
+    margin-left: 10px!important;
+}
 
 .chamada-container header span{
     font-size: 20px;
@@ -23,7 +26,7 @@
 }
 
 .chamada-container header a{
-    width: 260px;
+    width: 170px;
     margin-left: auto;
     margin-top: 0;
 }

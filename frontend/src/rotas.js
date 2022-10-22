@@ -8,6 +8,7 @@ import NovaChamada from "./Pages/novaChamada";
 import RegistroChamadaAluno from "./Pages/regChamada";
 import Error404 from "./Pages/404";
 import RegistroAula from "./Pages/registroDeAula";
+import AdicionarAlunos from "./Pages/addAlunos";
 
 const Private = ({Component}) => {
     return isAuthenticated() ? <Component/> : <Navigate to="/login"/>
@@ -22,6 +23,7 @@ export default function rotas() {
                 <Route exact path="/chamadas" element={<Private Component={Chamadas}/>} />
                 <Route exact path="/chamadas/manual" element={<Private Component={NovaChamada}/>} />
                 <Route exact path="/chamadas/registrar/aula" element={<Private Component={RegistroAula}/>} />
+                <Route exact path="/chamadas/adicionar/aluno" element={<Private Component={AdicionarAlunos}/>} />
                 <Route exact path="/" element={<RegistroChamadaAluno/>}/>
             </Routes>
         </BrowserRouter>
