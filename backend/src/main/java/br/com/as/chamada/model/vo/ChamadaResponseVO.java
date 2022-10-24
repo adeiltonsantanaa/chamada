@@ -6,24 +6,32 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.com.as.chamada.model.entities.ChamadaModel;
+
 public class ChamadaResponseVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	private Long matricula;
 	@JsonBackReference
-	private Long disciplina;
+	private String disciplina;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date datetime;
 
 	public ChamadaResponseVO() {
 	}
 
-	public ChamadaResponseVO(Long id, Long matricula, Long disciplina, Date datetime) {
+	public ChamadaResponseVO(Long id, Long matricula, String disciplina, Date datetime) {
 		this.id = id;
 		this.matricula = matricula;
 		this.disciplina = disciplina;
 		this.datetime = datetime;
+	}
+
+	public static ChamadaResponseVO parseToVO(ChamadaModel chamada) {
+		return new ChamadaResponseVO(chamada.getId(), chamada.getMatricula(),
+				chamada.getDiscModel().getDisciplinaNome(), chamada.getDatetime());
+
 	}
 
 	public Long getId() {
@@ -42,11 +50,11 @@ public class ChamadaResponseVO implements Serializable {
 		this.matricula = matricula;
 	}
 
-	public Long getDisciplina() {
+	public String getDisciplina() {
 		return disciplina;
 	}
 
-	public void setDisciplina(Long disciplina) {
+	public void setDisciplina(String disciplina) {
 		this.disciplina = disciplina;
 	}
 
