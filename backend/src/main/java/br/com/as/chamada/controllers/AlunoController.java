@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.as.chamada.model.entities.AlunoModel;
-import br.com.as.chamada.model.repositories.AlunoRepository;
+import br.com.as.chamada.model.services.AlunoService;
+import br.com.as.chamada.model.vo.AlunoVO;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -16,11 +17,11 @@ import br.com.as.chamada.model.repositories.AlunoRepository;
 public class AlunoController {
 
 	@Autowired
-	private AlunoRepository alunoRepository;
+	private AlunoService alunoService;
 
 	@PostMapping
-	public AlunoModel salvar(@RequestBody AlunoModel aluno) {
-		return alunoRepository.save(aluno);
+	public AlunoVO salvar(@RequestBody AlunoModel aluno) {
+		return alunoService.salvaAluno(aluno);
 	}
 
 }
