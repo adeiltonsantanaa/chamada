@@ -37,24 +37,28 @@ public class ChamadaService {
 	}
 
 	public ChamadaResponseVO adicionaUmRegistro(ChamadaRequestVO vo) {
+		verificaEntradas(vo);
+		verificaSeAlunoEstaNaBase(vo.getMatricula());
+		DisciplinaModel disciplina = disciplinaRepository.getReferenceById(vo.getDisciplina());
+		ChamadaModel obj = ChamadaModel.parseToChamadaModel(vo, disciplina);
+		chamadaRepository.save(obj);
+		return ChamadaResponseVO.parseToVO(obj);
+	}
+
+	private boolean verificaSeAlunoEstaNaBase(Long matricula) throws ResourceNotFoundException {
+		if (alunoRepository.buscaPorMatricula((Long) matricula) == null) {
+			throw new ResourceNotFoundException(
+					"Matrícula " + matricula + " não encontrado no banco, tente novamente com a matrícula correta!");
+		}
+		return true;
+	}
+
+	private Boolean verificaEntradas(ChamadaRequestVO vo) throws NullInputException {
 		if (vo.getMatricula() == null || vo.getDisciplina() == null) {
 			if (vo.getMatricula() == null) {
 				throw new NullInputException("Matrícula não pode ser nula!");
 			}
 			throw new NullInputException("Disciplina não pode ser nula");
-		}
-		if (verificaMatricula(vo.getMatricula())) {
-			DisciplinaModel disciplina = disciplinaRepository.getReferenceById(vo.getDisciplina());
-			ChamadaModel obj = ChamadaModel.parseToChamadaModel(vo, disciplina);
-			chamadaRepository.save(obj);
-			return ChamadaResponseVO.parseToVO(obj);
-		}
-		throw new ResourceNotFoundException("Matrícula não encontrada");
-	}
-
-	private boolean verificaMatricula(Long matricula) {
-		if (alunoRepository.buscaPorMatricula((Long) matricula) == null) {
-			return false;
 		}
 		return true;
 	}
