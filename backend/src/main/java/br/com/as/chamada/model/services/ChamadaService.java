@@ -36,7 +36,7 @@ public class ChamadaService {
 		return vo.stream().map(v -> DisciplinaVO.parseToVO(v)).collect(Collectors.toList());
 	}
 
-	public ChamadaResponseVO adicionaUmRegistro(ChamadaRequestVO vo) {
+ 	public ChamadaResponseVO adicionaUmRegistro(ChamadaRequestVO vo) {
 		verificaEntradas(vo);
 		verificaSeAlunoEstaNaBase(vo.getMatricula());
 		DisciplinaModel disciplina = disciplinaRepository.getReferenceById(vo.getDisciplina());
