@@ -5,6 +5,8 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.com.as.chamada.model.entities.RegistroAulaModel;
+
 public class RegistroAulaResponseVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -18,12 +20,18 @@ public class RegistroAulaResponseVO implements Serializable {
 	public RegistroAulaResponseVO() {
 	}
 
-	public RegistroAulaResponseVO(Long id, String descricao, LocalDate dataRegistro, String professor, String discModel) {
+	public RegistroAulaResponseVO(Long id, String descricao, LocalDate dataRegistro, String professor,
+			String discModel) {
 		this.id = id;
 		this.descricao = descricao;
 		this.dataRegistro = dataRegistro;
 		this.professor = professor;
 		this.discModel = discModel;
+	}
+
+	public static RegistroAulaResponseVO parseToVO(RegistroAulaModel reg) {
+		return new RegistroAulaResponseVO(reg.getId(), reg.getDescricao(), reg.getDataRegistro(),
+				reg.getProfessor().getNome(), reg.getDiscModel().getDisciplinaNome());
 	}
 
 	public Long getId() {
