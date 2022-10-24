@@ -11,7 +11,7 @@ INSERT INTO tb_aluno (id, matricula, nome) values (999,'202108672157', 'Adeilton
 INSERT INTO tb_disciplina(disciplina_nome, turma_nome, professor) VALUES ('POO java', 'ara1001', 1);
 INSERT INTO tb_disciplina(disciplina_nome, turma_nome, professor) VALUES ('POO 2', 'ara1001', 1);
 INSERT INTO tb_disciplina(disciplina_nome, turma_nome, professor) VALUES ('POO 3', 'ara1001', 1);
-INSERT INTO tb_disciplina_aluno (desc_id, aluno_id) values (1,1);
+INSERT INTO tb_disciplina_aluno (desc_id, aluno_id) values (1,999);
 
 
 INSERT INTO TB_REGISTRO_CHAMADA (id, data_registro, matricula, fk_turma_disc) VALUES (999, '2022-01-01', '202108672157', 1);

@@ -2,21 +2,29 @@ package br.com.as.chamada.model.vo;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import br.com.as.chamada.model.entities.ProfessorModel;
+import br.com.as.chamada.model.entities.DisciplinaModel;
 
 public class DisciplinaVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	@JsonIgnore
 	private String turmaNome;
 	private String disciplinaNome;
-	@JsonIgnore
-	private ProfessorModel professor;
+	private String professor;
+
+	public DisciplinaVO(Long id, String turmaNome, String disciplinaNome, String professor) {
+		this.id = id;
+		this.turmaNome = turmaNome;
+		this.disciplinaNome = disciplinaNome;
+		this.professor = professor;
+	}
 
 	public DisciplinaVO() {
+	}
+
+	public static DisciplinaVO parseToVO(DisciplinaModel disciplina) {
+		return new DisciplinaVO(disciplina.getId(), disciplina.getTurmaNome(), disciplina.getDisciplinaNome(),
+				disciplina.getProfessor().getNome());
 	}
 
 	public Long getId() {
@@ -43,11 +51,11 @@ public class DisciplinaVO implements Serializable {
 		this.disciplinaNome = disciplinaNome;
 	}
 
-	public ProfessorModel getProfessor() {
+	public String getProfessor() {
 		return professor;
 	}
 
-	public void setProfessor(ProfessorModel professor) {
+	public void setProfessor(String professor) {
 		this.professor = professor;
 	}
 
