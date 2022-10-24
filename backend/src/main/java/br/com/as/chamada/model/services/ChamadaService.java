@@ -1,20 +1,20 @@
 package br.com.as.chamada.model.services;
 
-import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.as.chamada.exceptions.NullInputException;
 import br.com.as.chamada.exceptions.ResourceNotFoundException;
-import br.com.as.chamada.mapper.DozerMapper;
 import br.com.as.chamada.model.entities.ChamadaModel;
 import br.com.as.chamada.model.entities.DisciplinaModel;
 import br.com.as.chamada.model.repositories.AlunoRepository;
 import br.com.as.chamada.model.repositories.ChamadaRepository;
 import br.com.as.chamada.model.repositories.DisciplinaRepository;
-import br.com.as.chamada.model.vo.ChamadaVO;
+import br.com.as.chamada.model.vo.ChamadaRequestVO;
+import br.com.as.chamada.model.vo.ChamadaResponseVO;
 import br.com.as.chamada.model.vo.DisciplinaVO;
 
 @Service
@@ -32,11 +32,11 @@ public class ChamadaService {
 	}
 
 	public List<DisciplinaVO> buscarTurmas() {
-		List<DisciplinaVO> vo = DozerMapper.parseListObjects(disciplinaRepository.findAll(), DisciplinaVO.class);
-		return vo;
+		List<DisciplinaModel> vo = disciplinaRepository.findAll();
+		return vo.stream().map(v -> DisciplinaVO.parseToVO(v)).collect(Collectors.toList());
 	}
 
-	public ChamadaVO adicionaUmRegistro(ChamadaVO vo) {
+	public ChamadaResponseVO adicionaUmRegistro(ChamadaRequestVO vo) {
 		if (vo.getMatricula() == null || vo.getDisciplina() == null) {
 			if (vo.getMatricula() == null) {
 				throw new NullInputException("Matrícula não pode ser nula!");
@@ -45,13 +45,9 @@ public class ChamadaService {
 		}
 		if (verificaMatricula(vo.getMatricula())) {
 			DisciplinaModel disciplina = disciplinaRepository.getReferenceById(vo.getDisciplina());
-			ChamadaModel obj = DozerMapper.parseObject(vo, ChamadaModel.class);
-			obj.setDatetime(new Date());
-			obj.setDiscModel(disciplina);
+			ChamadaModel obj = ChamadaModel.parseToChamadaModel(vo, disciplina);
 			chamadaRepository.save(obj);
-			ChamadaVO result = DozerMapper.parseObject(obj, ChamadaVO.class);
-			result.setDisciplinaNome(disciplina.getDisciplinaNome());
-			return result;
+			return ChamadaResponseVO.parseToVO(obj);
 		}
 		throw new ResourceNotFoundException("Matrícula não encontrada");
 	}
