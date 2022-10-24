@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.com.as.chamada.model.vo.ChamadaRequestVO;
+
 @Entity
 @Table(name = "tb_registro_chamada")
 public class ChamadaModel implements Serializable {
@@ -25,8 +27,13 @@ public class ChamadaModel implements Serializable {
 		this.datetime = datetime;
 	}
 
+	public static ChamadaModel parseToChamadaModel(ChamadaRequestVO vo, DisciplinaModel disciplina) {
+		return new ChamadaModel(vo.getMatricula(), disciplina, new Date());
+	}
+
 	public ChamadaModel() {
 	}
+
 	public ChamadaModel(Long matricula) {
 	}
 
