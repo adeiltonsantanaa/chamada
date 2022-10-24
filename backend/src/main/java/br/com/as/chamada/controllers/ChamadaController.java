@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.as.chamada.model.entities.ChamadaModel;
 import br.com.as.chamada.model.services.ChamadaService;
-import br.com.as.chamada.model.vo.ChamadaVO;
+import br.com.as.chamada.model.vo.ChamadaRequestVO;
+import br.com.as.chamada.model.vo.ChamadaResponseVO;
 import br.com.as.chamada.model.vo.DisciplinaVO;
 
 @RestController
@@ -30,20 +31,20 @@ public class ChamadaController {
 	public String check() {
 		return "check ok";
 	}
-	
+
 	@PreAuthorize("hasAnyRole('ADMINISTRADOR', 'OPERADOR', 'CONSULTA')")
-	@GetMapping(value = "/buscar/chamadas")
+	@GetMapping(value = "/buscar/chamadas", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<ChamadaModel> BuscarChamadas() {
 		return chamadaService.buscarChamadas();
 	}
 
-	@GetMapping(value = "/buscar/turmas")
+	@GetMapping(value = "/buscar/turmas", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<DisciplinaVO> BuscarTurmas() {
 		return chamadaService.buscarTurmas();
 	}
 
 	@PostMapping(value = "/salvar", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ChamadaVO salvar(@RequestBody ChamadaVO vo) {
+	public ChamadaResponseVO salvar(@RequestBody ChamadaRequestVO vo) {
 		return chamadaService.adicionaUmRegistro(vo);
 	}
 
