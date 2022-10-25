@@ -2,7 +2,6 @@ package br.com.as.chamada.model.entities;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,10 +18,10 @@ public class AlunoModel implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private Long matricula;
 	private String nome;
-	
+
 	@ManyToMany(mappedBy = "aluno")
 	List<DisciplinaModel> discModel;
 
@@ -58,23 +57,4 @@ public class AlunoModel implements Serializable {
 		this.discModel = discModel;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(discModel, id, matricula, nome);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AlunoModel other = (AlunoModel) obj;
-		return Objects.equals(discModel, other.discModel) && Objects.equals(id, other.id)
-				&& Objects.equals(matricula, other.matricula) && Objects.equals(nome, other.nome);
-	}
-	
-	
 }
